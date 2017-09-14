@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { ApolloClient, createNetworkInterface, gql, graphql, ApolloProvider } from 'react-apollo';
 import Sidebar from 'react-sidebar';
+import SideBarContent from './SideBarContent.js';
+import Table from './Table.js';
+import logo from './one-suncorp-logo.svg';
 import './App.css';
 
 const networkInterface = createNetworkInterface({
@@ -16,7 +19,7 @@ const client = new ApolloClient({
 
 const customersListQuery = gql `
   {
-    customers {
+    customer(id: "1589631e-2625-4832-a09c-e64eceecb132") {
       id
       title
       firstName
@@ -49,16 +52,28 @@ const customersListQuery = gql `
   }
 `;
 
-const CustomersList = ({ data: {loading, error, customers }}) => {
+var currentAccount = "Checking Account...";
+
+const CustomersList = ({ data: {loading, error, customer }}) => {
    if (loading) {
      return <p>Loading ...</p>;
    }
    if (error) {
-     return <p>{error.message}</p>;
+     return <p>{ error.message }</p>;
    }
-   return <ul>
-     { customers.map( c => <li key={c.id}>{c.firstName} {c.lastName}</li> ) }
-   </ul>;
+   var everydayOptions = customer.bankAccounts.find(b => b.product == "Everyday Options");
+   var accountBSBAndNumber = everydayOptions.bsb + "  " + everydayOptions.accountNumber;
+   return (
+     <div>
+       <div className="App-Logo">
+         <img src={logo} alt="one-suncorp-logo" style={logoImageStyles}/>
+       </div>
+       <div className="App-header">
+         <h1>{everydayOptions.product}</h1>
+         <h2>{accountBSBAndNumber}</h2>
+       </div>
+       <Table data={ everydayOptions.bankTransactions } style={ tableStyles } />
+     </div>);
  };
 
 const CustomersListWithData = graphql(customersListQuery)(CustomersList);
@@ -75,6 +90,17 @@ const sidebarStyles = {
 
 const mainStyles = {
    margin: '40px'
+}
+
+const tableStyles = {
+  marginTop: '100px'
+}
+
+const logoImageStyles = {
+   width: '200px',
+   marginTop: '20px',
+   marginBottom: '20px',
+   float: 'right'
 }
 
 class App extends Component {
@@ -109,7 +135,7 @@ class App extends Component {
   }
   
   render() {
-    var sidebarContent = <b>Sidebar content</b>;
+    var sidebarContent = <SideBarContent />;
 
     return (
         <Sidebar styles={sidebarStyles} 
@@ -119,14 +145,10 @@ class App extends Component {
                onSetOpen={this.onSetSidebarOpen}>
           <ApolloProvider client={client}>
           <div className="App" style={mainStyles}>
-            <div className="App-header">
-            <h2>Transaction Account - 3331 2349</h2>
-            </div>
-            <CustomersListWithData />
+              <CustomersListWithData />
           </div>
           </ApolloProvider>
         </Sidebar>
-
     );
   }
 }
