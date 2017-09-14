@@ -3,6 +3,7 @@ import { ApolloClient, createNetworkInterface, gql, graphql, ApolloProvider } fr
 import Sidebar from 'react-sidebar';
 import SideBarContent from './SideBarContent.js';
 import Table from './Table.js';
+import ModalBox from './Modal.js';
 import logo from './one-suncorp-logo.svg';
 import './App.css';
 
@@ -52,8 +53,6 @@ const customersListQuery = gql `
   }
 `;
 
-var currentAccount = "Checking Account...";
-
 const CustomersList = ({ data: {loading, error, customer }}) => {
    if (loading) {
      return <p>Loading ...</p>;
@@ -61,7 +60,7 @@ const CustomersList = ({ data: {loading, error, customer }}) => {
    if (error) {
      return <p>{ error.message }</p>;
    }
-   var everydayOptions = customer.bankAccounts.find(b => b.product == "Everyday Options");
+   var everydayOptions = customer.bankAccounts.find(b => b.product === "Everyday Options");
    var accountBSBAndNumber = everydayOptions.bsb + "  " + everydayOptions.accountNumber;
    return (
      <div>
@@ -144,8 +143,11 @@ class App extends Component {
                docked={this.state.sidebarDocked}
                onSetOpen={this.onSetSidebarOpen}>
           <ApolloProvider client={client}>
-          <div className="App" style={mainStyles}>
+          <div>
+            <div className="App" style={mainStyles}>
               <CustomersListWithData />
+              <ModalBox />
+            </div>
           </div>
           </ApolloProvider>
         </Sidebar>
