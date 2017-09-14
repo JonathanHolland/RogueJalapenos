@@ -146,7 +146,8 @@ class App extends Component {
           <div>
             <div className="App" style={mainStyles}>
               <CustomersListWithData />
-              <ModalBox />
+              <ModalBox buttonLabel={"Configure Roundups"} formLabel={"Please select an amount to round up by:"} title={"Configure Roundups"} localStorageVar={"roundup"} submitAsTransaction={false} />
+              <ModalBox buttonLabel={"Mimic Transactions"} formLabel={"Select an example transaction amount:"} title={"Mimic a Transaction"} localStorageVar={""} submitAsTransaction={true} />
             </div>
           </div>
           </ApolloProvider>
