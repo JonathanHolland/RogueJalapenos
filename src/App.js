@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
-import { ApolloClient, gql, graphql, ApolloProvider } from 'react-apollo';
+import { ApolloClient, createNetworkInterface, gql, graphql, ApolloProvider } from 'react-apollo';
 import logo from './logo.svg';
 import './App.css';
 
-const client = new ApolloClient();
+const networkInterface = createNetworkInterface({
+  uri: '__SIMPLE_API_ENDPOINT__'
+});
+
+const client = new ApolloClient({
+  networkInterface
+});
 
 const customersListQuery = gql `
   {
