@@ -77,7 +77,27 @@ export default class ModalBox extends React.Component {
             })
         }
         this.setState({ open: false }); }
+
     handleChange(e) { this.setState({ roundupValue: e.target.value } ); }
+
+    renderedFormInput() {
+        
+        const accountFormInputStyles = {
+            marginTop: "20px"
+        }
+
+        if (!this.props.submitAsTransaction) {
+            return <div style={ accountFormInputStyles }>
+                    <ControlLabel>Account to send roundups to:</ControlLabel>
+                    <FormControl disabled
+                        type="text"
+                        value="Insurance Premium"
+                    />
+                </div>;
+        } else {
+            return "";
+        }
+    }
 
     render() {
         return (
@@ -100,6 +120,7 @@ export default class ModalBox extends React.Component {
                     value={this.state.roundupValue}
                     onChange={this.handleChange}
                 />
+                {this.renderedFormInput()}
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={this.closeModal} className='btn btn-default'>Close</Button>
