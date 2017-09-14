@@ -4,7 +4,10 @@ import logo from './logo.svg';
 import './App.css';
 
 const networkInterface = createNetworkInterface({
-  uri: '__SIMPLE_API_ENDPOINT__'
+  uri: 'https://api.sunhack.suncorp.com.au/graphql',
+  opts: {
+    headers: {'x-api-key': "A3XDgfMQm78cEB86wS6B8a1WWMVbcofQ5Iu5k3DH"} 
+  }
 });
 
 const client = new ApolloClient({
@@ -46,7 +49,7 @@ const customersListQuery = gql `
   }
 `;
 
-const CustomersList = ({ data: {loading, error, channels }}) => {
+const CustomersList = ({ data: {loading, error, customers }}) => {
    if (loading) {
      return <p>Loading ...</p>;
    }
@@ -54,7 +57,7 @@ const CustomersList = ({ data: {loading, error, channels }}) => {
      return <p>{error.message}</p>;
    }
    return <ul>
-     { channels.map( ch => <li key={ch.id}>{ch.name}</li> ) }
+     { customers.map( c => <li key={c.id}>{c.firstName} {c.lastName}</li> ) }
    </ul>;
  };
 
