@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { ApolloClient, createNetworkInterface, gql, graphql, ApolloProvider } from 'react-apollo';
-import logo from './logo.svg';
 import './App.css';
 
 const networkInterface = createNetworkInterface({
@@ -69,8 +68,7 @@ class App extends Component {
       <ApolloProvider client={client}>
       <div className="App">
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+        <h2>Welcome</h2>
         </div>
         <CustomersListWithData />
       </div>
