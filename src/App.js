@@ -140,7 +140,7 @@ class App extends Component {
         <Sidebar styles={sidebarStyles} 
                sidebar={sidebarContent}
                open={this.state.sidebarOpen}
-               docked={this.state.sidebarDocked}
+               docked={true}
                onSetOpen={this.onSetSidebarOpen}>
           <ApolloProvider client={client}>
           <div>
