@@ -151,6 +151,8 @@ class App extends Component {
             </div>
           </div>
           </ApolloProvider>
+
+          <div><h3>The average home contents premium for your postcode of 4740 is $1887 </h3> </div>
         </Sidebar>
     );
   }
