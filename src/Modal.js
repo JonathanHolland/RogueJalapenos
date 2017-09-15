@@ -123,6 +123,8 @@ export default class ModalBox extends React.Component {
                 {this.renderedFormInput()}
             </Modal.Body>
             <Modal.Footer>
+                
+                <div><h3>The average contents premium for your postcode of 4740 is $1887</h3></div>  
                 <Button onClick={this.closeModal} className='btn btn-default'>Close</Button>
             
                 <Button className='btn btn-primary' onClick={this.saveAndClose}>
