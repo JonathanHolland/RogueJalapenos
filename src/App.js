@@ -81,7 +81,7 @@ const mql = window.matchMedia(`(min-width: 800px)`);
 
 const sidebarStyles = {
     sidebar: {
-        backgroundColor: '#577492',
+        backgroundColor: 'rgb(71,128,129)',
         opacity: '20%', 
         width: '300px'
     }

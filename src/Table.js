@@ -2,8 +2,6 @@ import React from 'react';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import '../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 
-/* Make a query here through graphql for bankTransactions for this user */
-
 export default class Table extends React.Component {
     render() {
         return (

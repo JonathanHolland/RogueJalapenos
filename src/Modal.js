@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal, Button, ControlLabel, FormControl } from 'react-bootstrap';
 
 const buttonFloatRightStyles = {
-    float: 'right'
+    float: 'right',
 }
 
 export default class ModalBox extends React.Component {
@@ -102,9 +102,9 @@ export default class ModalBox extends React.Component {
     render() {
         return (
         <div>
-            <button onClick={this.openModal} style={buttonFloatRightStyles}>
+            <Button bsStyle="primary" onClick={this.openModal} style={buttonFloatRightStyles}>
                 {this.props.buttonLabel}
-            </button>
+            </Button>
 
             <Modal
               show={this.state.open}
